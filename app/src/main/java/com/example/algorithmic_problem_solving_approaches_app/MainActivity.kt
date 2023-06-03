@@ -8,6 +8,7 @@ import android.widget.Button
 class MainActivity : AppCompatActivity() {
 
     lateinit var btnReverseString: Button
+    lateinit var btnBigNumber: Button
 
     var algorithmNameKey = "algorithmName"
     var algorithmQuestionKey = "algorithmQuestion"
@@ -16,11 +17,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnReverseString = findViewById(R.id.btnReverseString)
+        btnBigNumber = findViewById(R.id.btnBigNumber)
 
         btnReverseString.setOnClickListener(){
             var intent = Intent(this, QuestionPage::class.java)
             var algorithmName = btnReverseString.text.toString()
             var algorithmQuestion = "How do you find the reverse of a string?"
+            intent.putExtra(algorithmNameKey, algorithmName)
+            intent.putExtra(algorithmQuestionKey, algorithmQuestion)
+            startActivity(intent)
+        }
+
+        btnBigNumber.setOnClickListener(){
+            var intent = Intent(this, QuestionPage::class.java)
+            var algorithmName = btnBigNumber.text.toString()
+            var algorithmQuestion = "How do you find the largest number in a given array?"
             intent.putExtra(algorithmNameKey, algorithmName)
             intent.putExtra(algorithmQuestionKey, algorithmQuestion)
             startActivity(intent)

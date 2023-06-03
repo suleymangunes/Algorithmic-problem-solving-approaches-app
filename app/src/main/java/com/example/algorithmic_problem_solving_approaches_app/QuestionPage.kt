@@ -19,6 +19,7 @@ class QuestionPage : AppCompatActivity() {
     var algorithmNameKey = "algorithmName"
     var algorithmQuestionKey = "algorithmQuestion"
     var reverseString = "Reverse String"
+    var bigNumber = "Big Number"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +50,8 @@ class QuestionPage : AppCompatActivity() {
             var inputText = txtInput.text.toString()
             if(algorithmName == reverseString){
                 reverseStringFunction(inputText)
+            } else if (algorithmName == bigNumber){
+                findBigNumber(inputText)
             }
         }
     }
@@ -62,6 +65,25 @@ class QuestionPage : AppCompatActivity() {
         }
         setResult(reversedInput)
     }
+
+    fun findBigNumber(input:String){
+        try {
+            val numList = input.trim().split(" ")
+            var bigNum = numList[0].toIntOrNull()
+
+            for (i in numList){
+                val currentNum = i.toIntOrNull()
+                if(currentNum != null && bigNum != null && bigNum < currentNum){
+                    bigNum = currentNum
+                }
+            }
+            
+            setResult(bigNum.toString())
+        } catch (exception:Exception){
+            setResult("Hatali giriş yaptınız!")
+        }
+    }
+
 
     fun setResult(result:String){
         txtResult.setText(result)
